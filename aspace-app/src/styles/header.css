@@ -1,0 +1,26 @@
+.form button{
+    background: #f7549d;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+}
+.form button img{
+    width: 15px;
+}
+.navbar {
+    background-color: white;
+}
+.searchform{
+    border: 1px solid rgb(203, 200, 200); 
+    border-radius: 30px;  
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: 60%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+.form-control{
+    font-size: 80%;
+}

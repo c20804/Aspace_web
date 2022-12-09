@@ -1,0 +1,127 @@
+
+.sidebar .btn-group-sm .btn:hover{
+    background-color: #8cd9d1;
+    border-bottom: 3px solid  #f7549d;
+    color: #f7549d;
+}
+
+.price{
+    color:#b1a0a7;
+    font-weight: bold;
+}
+
+.card-button{
+    padding:0;
+    border-style: none;
+    background: none;
+}
+
+/* rating and location */
+.star{
+    height: 14px;
+  }
+  
+.rating{
+    display: flex;
+    align-items: center;
+    float:right;
+  }
+  
+.card-body{
+    text-align: left;
+  }
+  
+.location{
+    text-decoration: none;
+    color: #8cd9d1;
+}
+.location:hover{
+    color: #f7549d;
+}
+
+
+/* details */
+.close-btn {
+    text-align: center;
+    float: right;
+    color: #8cd9d1;
+    background-color: #ffffff;
+    border: #ffffff;
+}
+
+.close-btn:hover {
+    color: #f7549d;
+
+    background-color: #ffffff;
+    border: #ffffff;
+}
+
+.close{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.action_btn {
+    text-align: center;
+}
+.heart {
+    font-size: 24px;
+    display: inline-flex;
+    vertical-align: middle;
+  }
+
+.action_btn .reserve{
+    color: #8cd9d1;
+    border-color: #8cd9d1;
+    margin-right: 2px;
+    width: 85px;
+    height: 40px;
+}
+.action_btn .save{
+    color: #f7549d;
+    border-color: #f7549d;
+    margin-left: 2px;
+    width: 85px;
+    height: 40px;
+}
+.action_btn .reserve:hover{
+    color: #ffffff;
+    background-color: #8cd9d1;
+    border-color: #8cd9d1;
+    margin-right: 2px;
+    width: 85px;
+}
+
+.action_btn .save:hover{
+    color: #ffffff;
+    background-color: #f7549d;
+    border-color: #f7549d;
+    margin-left: 2px;
+    width: 85px;
+}
+
+.amenities {
+    color: #b1a0a7;
+    font-style: oblique;
+    font-weight: bold;
+}
+
+.description {
+    color: #b1a0a7;
+    font-weight: bold;
+    font-style: oblique;
+}
+
+/* listing_detail */
+
+
+
+.listing_det{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.listing_detail {
+    width: 30rem;
+}
+

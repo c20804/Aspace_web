@@ -1,0 +1,26 @@
+body {
+    padding-top: 100px;
+}
+
+.container {
+   text-align: center;
+   
+}
+
+#menu .btn{
+    background-color: #ffffff;
+    color: #f7549d;
+    border-style: none;
+}
+
+#menu button.active {
+    color:#8cd9d1;
+}
+
+#menu .btn:hover{
+    color: #8cd9d1;
+    background-color: #ffffff;
+}
+.material-icons{
+    display: block;
+  }

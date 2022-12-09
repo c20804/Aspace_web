@@ -1,0 +1,12 @@
+.signup_form .button_color {
+    background-color: #8cd9d1;
+    border: none;
+    color: #f7549d;
+}
+.signup_form .form_text {
+    color: #195751; 
+}
+.signup_form_border {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 10%;
+}
