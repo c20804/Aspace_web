@@ -7,7 +7,7 @@ const CardComponent = (props) => {
     <div className="col">
       <button className="card-button">
       <div className="card h-100" onClick={() => { props.setClick({ click: true, id: props.properties._id }) }}>
-        <img src={props.properties.image} className="card-img-top" alt="image"></img>
+        <img src={`data:image/jepg;base64,${props.properties.image}`} className="card-img-top" alt="image"></img>
         <div className="card-body">
           <div className='cardhead'>
             <div className='rating'>

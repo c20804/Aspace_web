@@ -32,7 +32,17 @@ const PostPropertyComponent = (props) => {
         setPrice(e.target.value);
     };
     const handleChangeImage = (e) => {
-        setImage(e.target.value);
+        // var image = reader.readAsDataURL(e.target.files[0]);
+        let reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+
+        reader.onload = () => {
+          image = reader.result;
+          // console.log(image.split(",")[1]);
+          setImage(image.split(",")[1]);
+        }
+        // console.log(URL.createObjectURL(e.target.files[0]).result);
+        // setImage(URL.createObjectURL(e.target.files[0]));
       };
     const handleChangeCity = (e) => {
         setCity(e.target.value);
@@ -123,14 +133,16 @@ const PostPropertyComponent = (props) => {
               onChange={handleChangePrice}
             />
             <br />
-            <label for="imageOfPost">Image</label>
+            {/* <label for="imageOfPost">Image</label>
             <input
               name="image"
               type="text"
               className="form-control"
               id="imageOfPost"
               onChange={handleChangeImage}
-            />
+            /> */}
+            <label className="form-label" for="customFile">Default file input example</label>
+            <input onChange={handleChangeImage} name="image" type="file" class="form-control" id="inputFile" />
             <br />
             <label for="cityOfPost">City</label>
             <input

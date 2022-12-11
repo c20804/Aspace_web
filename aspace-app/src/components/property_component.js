@@ -72,6 +72,7 @@ const PropertyComponent = (props) => {
                     {propertyData.map((property) => (
                         <div className="card" style={{ width: "18rem" }}>
                             <div className="card-body">
+                            <img src={`data:image/jepg;base64,${property.image}`} alt="property" width={"250rem"} height={"250rem"} />
                                 <h5 className="card-title">{property.title}</h5>
                                 <h3>{property.city}</h3>
                                 <p className="card-text">{property.description}</p>

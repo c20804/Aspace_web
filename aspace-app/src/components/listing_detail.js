@@ -30,7 +30,7 @@ cancel
 </span></button>
         
         <div className='cardhead'>
-            <img src={properties.image} className="card-img-top"></img>
+            <img src={`data:image/jepg;base64,${properties.image}`} className="card-img-top" alt="property"></img>
             <div className='rating'>
                 <img src='./images/Star.png' className='star' alt='star' />
                 <span>{properties.rating}</span>

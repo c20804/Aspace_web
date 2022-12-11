@@ -14,9 +14,11 @@ const ListProperties = (props) => {
 
     const rows = [];
     const [isClick, setClick] = useState({click: false, id:"-1"});
-    // console.log(isClick)
+    const index = properties.findIndex(obj => {
+        return obj._id === isClick.id;
+      });
     if (isClick.click && isClick.id !== -1) {
-        return <Listing_detail key={isClick.id} properties={original[isClick.id - 1]} isClick={isClick} setClick={setClick} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        return <Listing_detail key={isClick.id} properties={original[index]} isClick={isClick} setClick={setClick} currentUser={currentUser} setCurrentUser={setCurrentUser} />
     } else 
     {
         properties.forEach((property) =>  {
