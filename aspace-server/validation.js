@@ -21,8 +21,8 @@ const registerValidation = (data) => {
                               'password.minOfNumeric': '{#label} should contain at least {#min} numeric character',
                               'password.noWhiteSpaces': '{#label} should not contain white spaces',
                         }),
-        name: Joi.string().required(),
-        isHost: Joi.boolean(),
+        name: Joi.string().min(3).max(50).required(),
+        role: Joi.string().required().valid("guest", "host"),
     });
 
     return schema.validate(data);
@@ -52,6 +52,21 @@ const loginValidation = (data) => {
     return schema.validate(data);
 };
 
+const propertyValidation = (data) => {
+      const schema = Joi.object({
+            title: Joi.string().min(3).max(50).required(),
+            type: Joi.string().min(3).max(50).required(),
+            price: Joi.number().min(1).max(999).required(),
+            image: Joi.string().min(3).max(50).required(),
+            city: Joi.string().min(3).max(50).required(),
+            address: Joi.string().min(3).max(50).required(),
+            postalCode: Joi.number().min(10000).max(99999).required(),
+            description: Joi.string().min(6).max(255).required(),
+            amenities: Joi.string().min(6).max(255).required(),
+      });
+      return schema.validate(data);
+};
 
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
+module.exports.propertyValidation = propertyValidation;

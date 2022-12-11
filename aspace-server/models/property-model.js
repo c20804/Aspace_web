@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const propertySchema = new mongoose.Schema({
-    host: {
+    host:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },
@@ -25,15 +25,11 @@ const propertySchema = new mongoose.Schema({
     image: {
         type: String,
     },
-    country: {
+    city: {
         type: String,
         required: true,
     },
     state: {
-        type: String,
-        required: true,
-    },
-    city: {
         type: String,
         required: true,
     },
@@ -52,17 +48,22 @@ const propertySchema = new mongoose.Schema({
     amenities: {
         type: String,
     },
+    comments: {
+        type: [String],
+        default: [],
+    },
     unAvailable: {
         type: [Date],
+        default: [],
     },
     occupancy: {
         type: Number,
-        required: true,
+        // required: true,
     },
-    comment: {
+    addFavBy: {
         type: [String],
         default: [],
-    }
+    },
 });
 
 const Property = mongoose.model("Property", propertySchema);

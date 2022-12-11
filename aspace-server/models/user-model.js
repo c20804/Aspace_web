@@ -1,50 +1,75 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-// import pkg from 'validator';
-// const { isEmail } = pkg;
 
-const userSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        unique: true,
-        required: [true, 'Email address is required!'],
-        // validate: [isEmail, 'Invalid email!']
-    },
-    name: {
+const userSchema = new mongoose.Schema(
+    {
+      email: {
         type: String,
         required: true,
-    },
-    password: {
+        unique: true,
+        minLength:6,
+        maxLength:50,
+      },
+      name:{
+          type: String,
+          required: true,
+          minLength:3,
+          maxLength:50,
+      },
+      password: {
         type: String,
-        requred: true,
-    },
-    isHost: {
-        type: Boolean,
-        default: false,
-    },
-},
-    { timestamps: true }
-);
+        required: true,
+        minLength:6,
+        maxLength:1024,
+      },
+      favList: {
+        type: [String],
+        default: [],
+      },
+      role: {
+        type: String,
+        enum: ["guest", "host"],
+        default: "guest",
+        required: true,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+});
 
-// mongoose schema middleware
+userSchema.methods.isGuest = function() {
+    return this.role == "guest";
+};
+
+userSchema.methods.isHost = function() {
+    return this.role == "host";
+};
+
+userSchema.methods.isAdmin = function() {
+  return this.role == "admin";
+};
+
+// mongoose schema middlewares
 userSchema.pre("save", async function(next) {
-    if (this.isModified("password") || this.isNew) {
+    if(this.isModified("password") || this.isNew) {
         const hash = await bcrypt.hash(this.password, 10);
         this.password = hash;
         next();
-    } else {
+    } else{
         return next();
     }
 });
 
-// password compare
-userSchema.methods.comparePassword = function comparePassword (password, cb) {
+userSchema.methods.comparePassword = function(password, callback) {
+    // password: plain text from user input
+    //this.password: the hashed password
     bcrypt.compare(password, this.password, (err, isMatch) => {
-        if (err) {
-            return cb(err, isMatch);
+        if(err) {
+            return callback(err, isMatch)
         }
-        cb(null, isMatch);
+        callback(null, isMatch);
     });
-  };
+};
 
 module.exports = mongoose.model("User", userSchema);

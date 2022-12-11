@@ -5,7 +5,11 @@ const reservationSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Property",
     },
-    userId: {
+    host: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Property",
+    },
+    guest: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },

@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import AuthService from "../services/auth.service";
 import "../styles/header.css";
 
-const HeaderComponent = ({search, setSearch}) => {
+const HeaderComponent = (props) => {
+  const { search, setSearch, currentUser, setCurrentUser } = props
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    AuthService.logout();
+    window.alert("Logout Successfully, you are redirecting to the homepage.");
+    setCurrentUser(null);
+    navigate("/");
+  };
 
   let [inputLocation, setInputLocation] = useState("");
   let [inputTime, setInputTime] = useState("");
@@ -76,14 +85,14 @@ const HeaderComponent = ({search, setSearch}) => {
                     </div>
                     <div className="col-auto">
                         <div className="mt-3 mb-3">
-                            <button type="submit" onClick={submitHandler}><img src="images/search.png"></img></button>
+                            <button type="submit" onClick={submitHandler}><img src="images/search.png" alt='search'></img></button>
                         </div>
                     </div>
                 </div>
             </form>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">Host</a>
+                  <span className="nav-link active" aria-current="page">Hi! {currentUser && (currentUser.user.name)}</span>
                 </li>
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -93,8 +102,14 @@ const HeaderComponent = ({search, setSearch}) => {
                     </svg>
                   </a>
                   <ul className="dropdown-menu dropdown-menu-end">
-                    <li><a className="dropdown-item" href="/login">Log in</a></li>
-                    <li><a className="dropdown-item" href="/api/user/register">Sign up</a></li>
+                    {!currentUser && (<li><a className="dropdown-item" href="/login">Log in</a></li>)}
+                    {!currentUser && (<li><a className="dropdown-item" href="/register">Sign up</a></li>)}
+                    {currentUser && (<li><a className="dropdown-item" href="/profile">Profile</a></li>)}
+                    {currentUser && currentUser.user.role === 'host' && (<li><a className="dropdown-item" href="/property">Property</a></li>)}
+                    {currentUser && currentUser.user.role === 'guest' && (<li><a className="dropdown-item" href="/property">Favorite</a></li>)}
+                    {currentUser && currentUser.user.role === 'host' && (<li><a className="dropdown-item" href="/postProperty">Add Property</a></li>)}
+                    {currentUser && currentUser.user.role === 'guest' && (<li><a className="dropdown-item" href="/reserve">Reservation</a></li>)}
+                    {currentUser && (<li><a onClick={handleLogout} className="dropdown-item" href="/">Log out</a></li>)}
                   </ul>
                 </li>
               </ul>
@@ -105,4 +120,4 @@ const HeaderComponent = ({search, setSearch}) => {
   )
 }
 
-export default HeaderComponent
+export default HeaderComponent;
