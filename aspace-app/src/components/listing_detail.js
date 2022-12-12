@@ -12,6 +12,17 @@ const Listing_detail = (props) => {
     const handleTakeToSignUp = () => {
         navigate("/register");
     };
+
+    const handleAddFav = (e) => {
+      PropertyService.addFav(e.target.id, currentUser.user._id)
+      .then(() => {
+        window.alert("Added to Favorite");
+        navigate("/property");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
     useEffect(() => {
         console.log("Using effect.");
         let _id;
@@ -61,7 +72,7 @@ cancel
       )}
         {currentUser && currentUser.user.role === "guest" && (<div className='action_btn'>                    
             <button type="button" class="btn btn-outline-success reserve" id={currentUser.user._id}>Reserve</button>
-            <button type="button" class="btn btn-outline-danger save" id={currentUser.user._id}><span className="material-symbols-outlined heart">favorite</span></button>
+            <button onClick={handleAddFav} type="button" class="btn btn-outline-danger save" id={properties._id}><span className="material-symbols-outlined heart">favorite</span></button>
         </div>)}
 
     </div>

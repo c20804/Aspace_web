@@ -47,32 +47,6 @@ router.get("/guest/:_guest_id", (req, res) => {
     });
 });
 
-// // try to add guests favorites
-// router.patch("/guest/:_guest_id", (req, res) => {
-//   let { _guest_id } = req.params;
-//   User.findOneAndUpdate({ _id: _guest_id })
-//     .populate("host", ["name", "email"])
-//     .then((properties) => {
-//       res.status(200).send(properties);
-//     })
-//     .catch(() => {
-//       res.status(500).send("Cannot get data.");
-//     });
-// });
-
-// // get guests reserved propertes - try reservation
-// router.get("/guest/:_guest_id", (req, res) => {
-//   let { _guest_id } = req.params;
-//   Reservation.find({ guest: _guest_id })
-//     .populate("host", ["name", "email"])
-//     .then((properties) => {
-//       res.status(200).send(properties);
-//     })
-//     .catch(() => {
-//       res.status(500).send("Cannot get data.");
-//     });
-// });
-
   //get one
 router.get("/:_id", (req, res) => {
 let { _id } = req.params;
@@ -119,28 +93,52 @@ router.post("/", async (req, res) => {
     }
   });
 
-// just try
-// router.post("/reservation/:_propertyID", async(req, res) => {
+  // added fav 
+  router.post("/property/:_id", async (req, res) => {
+    let { _id } = req.params;
+    let { user_id } = req.body;
+    try {
+      let property = await Property.findOne({ _id });
+        property.addFavBy.push(user_id);
+        await property.save();
+        res.send("This property has been added to your favorites.");
+    } catch (err) {
+      res.send(err);
+    }
+  });
 
-// });
+  //just try remove fav but failed!!!!
+  router.patch("/property/:_id", async (req, res) => {
+    let { _id } = req.params;
+    let { user_id } = req.body;
+  
+      try {
+        await Property.findByIdAndUpdate(_id, {
+          $pull: { addFavBy: user_id },
+        });
+    } catch (err) {
+      res.send(err);
+    }
+  });
 
 
 
-// edit property
+
+// edit path改成edit/:_id較好
 router.patch("/:_id", async (req, res) => {
-// validate the inputs before making a new one
-const { error } = propertyValidation(req.body);
-if (error) return res.status(400).send(error.details[0].message);
-
-let { _id } = req.params;
-let property = await Property.findOne({ _id });
-if (!property) {
-    res.status(404);
-    return res.json({
-    success: false,
-    message: "Property not found.",
-    });
-}
+  // validate the inputs before making a new one
+  const { error } = propertyValidation(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  
+  let { _id } = req.params;
+  let property = await Property.findOne({ _id });
+  if (!property) {
+      res.status(404);
+      return res.json({
+      success: false,
+      message: "Property not found.",
+      });
+  }
 
 if (property.host.equals(req.user._id) || req.user.isAdmin()) {
     Property.findOneAndUpdate({ _id }, req.body, {

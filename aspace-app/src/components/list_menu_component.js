@@ -47,14 +47,12 @@ const ListMenuComponent = ({ activeCategory, setActiveCategory, setFiltered, pro
                 <button onClick={() => setActiveCategory('garage')} type="button" className={activeCategory === 'garage' ? "btn btn-light active" : "btn btn-light"} id='garage'><span
                     className="material-icons">warehouse</span>
                     Garage</button>
-                <button onClick={() => setActiveCategory('livingroom')} type="button" className={activeCategory === 'ivingroom' ? "btn btn-light active" : "btn btn-light"} id='living_room'><span
+                <button onClick={() => setActiveCategory('livingroom')} type="button" className={activeCategory === 'livingroom' ? "btn btn-light active" : "btn btn-light"} id='living_room'><span
                     className="material-icons">chair</span>
                     Living Room</button>
                 <button onClick={() => setActiveCategory('workspace')} type="button" className={activeCategory === 'workspace' ? "btn btn-light active" : "btn btn-light"} id='workspace'><span
                     className="material-icons">business_center</span>
                     Workspace</button>
-                <button type="button" className="btn btn-light" id='settings'><span className="material-icons">tune</span>
-                </button>
             </div>
         </div>
     )
