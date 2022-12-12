@@ -55,7 +55,7 @@ return (
                 </div>
         )}
 
-        {currentUser && currentUser.user.role === "guest" && (
+        {currentUser && currentUser.user.role === "guest" && reservationData &&(
                     <div>
                         <p>Here's your reservations.</p>
                         {reservationData.map((reservation) => (
