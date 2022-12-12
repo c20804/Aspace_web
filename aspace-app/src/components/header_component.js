@@ -108,7 +108,7 @@ const HeaderComponent = (props) => {
                     {currentUser && currentUser.user.role === 'host' && (<li><a className="dropdown-item" href="/property">Property</a></li>)}
                     {currentUser && currentUser.user.role === 'guest' && (<li><a className="dropdown-item" href="/property">Favorite</a></li>)}
                     {currentUser && currentUser.user.role === 'host' && (<li><a className="dropdown-item" href="/postProperty">Add Property</a></li>)}
-                    {currentUser && currentUser.user.role === 'guest' && (<li><a className="dropdown-item" href="/reserve">Reservation</a></li>)}
+                    {currentUser && currentUser.user.role === 'guest' && (<li><a className="dropdown-item" href="/reservation">Reservation</a></li>)}
                     {currentUser && (<li><a onClick={handleLogout} className="dropdown-item" href="/">Log out</a></li>)}
                   </ul>
                 </li>

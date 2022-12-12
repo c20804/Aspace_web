@@ -10,7 +10,8 @@ import ProfileComponent from './components/profile_component';
 import PropertyComponent from './components/property_component';
 import PostPropertyComponent from './components/postProperty_component';
 import EditPropertyComponent from './components/editProperty_component';
-// import ReserveComponent from './components/reserve_component';
+import ReserveComponent from './components/reserve_component';
+import PostReservationComponent from './components/postReservation_component';
 import AuthService from "./services/auth.service";
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
         <Route path="/property" element={<PropertyComponent currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
         <Route path="/postProperty" element={<PostPropertyComponent currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
         <Route path="/editproperty/:id" element={<EditPropertyComponent currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
+        <Route path="/reservation" element={<ReserveComponent currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
+        <Route path="/postReservation" element={<PostReservationComponent currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
       </Routes>
       <FooterComponent />
     </div>

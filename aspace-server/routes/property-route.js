@@ -1,6 +1,8 @@
+const { property } = require(".");
+
 const router = require("express").Router();
 const Property = require("../models").propertyModel;
-// const Reservation = require("../models").reservationModel;
+const Reservation = require("../models").reservationModel;
 const propertyValidation = require("../validation").propertyValidation;
 
 router.use((req, res, next) => {
@@ -91,6 +93,78 @@ router.post("/", async (req, res) => {
     } catch (err) {
       res.status(400).send("Cannot save property.");
     }
+  });
+
+  // create reservation
+  router.post("/reservation/:_id/:user_id", async(req, res) => {
+    let { _id, user_id} = req.params;
+    let { date, guestNumber} = req.body;
+
+    let newReservation = new Reservation({
+      propertyId: _id,
+      guest: req.user._id,
+      date,
+      guestNumber,
+    });
+
+    try {
+      let property = await Property.findOne({ _id });
+      const unAvailable = property.unAvailable;
+      const check = unAvailable.findIndex(item => item === date.split("T")[0])
+
+      if (check != -1) {
+        return res.status(400).send("Unavailable!");
+      } else {
+        property.unAvailable.push(date.split("T")[0]);
+        await property.save();
+      }
+      
+      await newReservation.save();
+      res.status(200).send("New reservation has been saved.");
+    } catch (err) {
+      res.status(400).send("Cannot save reservation.");
+    }
+    
+  });
+
+  // get reservation
+  router.get("/reservation/:user_id", (req, res) => {
+    let {user_id} = req.params;
+    const array = [];
+
+    Reservation.find({guest: user_id})
+      .then((reservation) => {
+        // const result = reservation.map((data) => {
+        //   console.log(data.propertyId)
+        //   const propertyId = data.propertyId;
+        //   Property.find({propertyId})
+        //     .then((property) => {
+        //       console.log(property)
+        //       array.push(data.guestNumber)
+        //       console.log(array)
+        //   });
+
+        //   return array;
+        // })
+        // property.find({reservation.propertyId}).then((property) => console.log(property));
+        res.send(reservation);
+      })
+      .catch(() => {
+        res.status(500).send("Error!! Cannot get reservation!!");
+      });
+  });
+
+  // get property by propertyid
+  router.get("/property/:_id", (req, res) => {
+    let {_id} = req.params;
+
+    Property.find({_id})
+      .then((property) => {
+        res.send(property);
+      })
+      .catch(() => {
+        res.status(500).send("Error!! Cannot get property!!");
+      });
   });
 
   // added fav 

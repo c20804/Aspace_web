@@ -22,7 +22,12 @@ const Listing_detail = (props) => {
       .catch((err) => {
         console.log(err);
       });
-  };
+    };
+
+    const handleReserve = (e) => {
+      navigate("/postReservation",{ state: { id: e.target.id } });
+    };
+
     useEffect(() => {
         console.log("Using effect.");
         let _id;
@@ -71,7 +76,7 @@ cancel
         </div>
       )}
         {currentUser && currentUser.user.role === "guest" && (<div className='action_btn'>                    
-            <button type="button" class="btn btn-outline-success reserve" id={currentUser.user._id}>Reserve</button>
+            <button onClick={handleReserve} type="button" class="btn btn-outline-success reserve" id={properties._id}>Reserve</button>
             <button onClick={handleAddFav} type="button" class="btn btn-outline-danger save" id={properties._id}><span className="material-symbols-outlined heart">favorite</span></button>
         </div>)}
 

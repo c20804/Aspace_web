@@ -144,6 +144,59 @@ class PropertyService {
 
       // }
 
+      // reserve
+      addReservation(_id, user_id, date, guestNumber){
+        let token;
+        if (localStorage.getItem("user")) {
+          token = JSON.parse(localStorage.getItem("user")).token;
+        } else {
+          token = "";
+        }
+    
+        return axios.post(
+          API_URL + "/reservation/" + _id + "/" + user_id,
+          { date,
+            guestNumber },
+          {
+            headers: {
+              Authorization: token,
+            },
+      }
+        );
+      }
+
+      // get reserve
+      getReservation(user_id) {
+        let token;
+        if (localStorage.getItem("user")) {
+          token = JSON.parse(localStorage.getItem("user")).token;
+        } else {
+          token = "";
+        }
+        return axios.get(API_URL + "/reservation/" + user_id, {
+          headers: {
+            Authorization: token,
+          },
+        });
+      }
+
+      // get property
+      getProperty(_id) {
+        let token;
+        if (localStorage.getItem("user")) {
+          token = JSON.parse(localStorage.getItem("user")).token;
+        } else {
+          token = "";
+        }
+        return axios.get(API_URL + "/property/" + _id, {
+          headers: {
+            Authorization: token,
+          },
+        });
+      }
+
+
+
 
 }
 

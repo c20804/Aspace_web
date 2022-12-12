@@ -54,7 +54,7 @@ const propertySchema = new mongoose.Schema({
         default: [],
     },
     unAvailable: {
-        type: [Date],
+        type: [String],
         default: [],
     },
     occupancy: {
