@@ -93,7 +93,7 @@ class PropertyService {
           token = "";
       }
 
-        return axios.put(
+        return axios.patch(
           API_URL + "/property/" + _id,
           { user_id },
           {

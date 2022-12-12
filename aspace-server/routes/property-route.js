@@ -181,15 +181,30 @@ router.post("/", async (req, res) => {
     }
   });
 
+  // // get fav 
+  // router.get("/property/:_id", async (req, res) => {
+  //   let { _id } = req.params;
+  //   let { user_id } = req.body;
+  //   try {
+  //     let property = await Property.findOne({ _id });
+  //       property.addFavBy.push(user_id);
+  //       await property.save();
+  //       res.send("This property has been added to your favorites.");
+  //   } catch (err) {
+  //     res.send(err);
+  //   }
+  // });
+
   //just try remove fav but failed!!!!
   router.patch("/property/:_id", async (req, res) => {
     let { _id } = req.params;
     let { user_id } = req.body;
   
       try {
-        await Property.findByIdAndUpdate(_id, {
-          $pull: { addFavBy: user_id },
-        });
+        let property = await Property.findByIdAndUpdate({ _id });
+        property.addFavBy.pull(user_id);
+        await property.save();
+        res.send("succussfull");
     } catch (err) {
       res.send(err);
     }

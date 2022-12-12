@@ -48,7 +48,7 @@ const PropertyComponent = (props) => {
         PropertyService.removeFav(e.target.id, currentUser.user._id)
         .then(() => {
           window.alert("Remove from Favorite");
-          navigate("/property");
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
