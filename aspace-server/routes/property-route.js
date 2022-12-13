@@ -295,6 +295,7 @@ router.delete("/:_id", async (req, res) => {
   });
 
 // delete reservation
+// delete reservation
 router.delete("/reservation/:_id", async (req, res) => {
   let { _id } = req.params;
   let reservation = await Reservation.findOne({ _id });
@@ -307,26 +308,41 @@ router.delete("/reservation/:_id", async (req, res) => {
   }
 
   if (reservation.guest.equals(req.user._id) || req.user.isAdmin()) {
-    let curTime = new Date();
-    // if curTime $gt
-    //if reservation.date
-    Reservation.deleteOne({ _id })
-        .then(() => {
-          res.send("Reservation deleted.");
-      })
-      .catch((e) => {
-          res.send({
-          success: false,
-          message: e,
-          });
-      });
+    let curDate = new Date();
+    let curTime = curDate.getTime();
+    let resTime = reservation.date.getTime();
+    let diff = (resTime - curTime )/ (1000*60*60*24.0);
+
+    if (diff >= 2) {
+      Reservation.deleteOne({ _id })
+      .then(() => {
+        res.send("Reservation deleted.");
+    })
+    .catch((e) => {
+        res.send({
+        success: false,
+        message: e,
+        });
+    });
+
+    };
   } else {
       res.status(403);
-      return res.json({
-      success: false,
-      message:
-          "Only the guest of this reservation or web admin can delete this reservation.",
-      });
+      if (diff < 2) {
+        return res.json({
+          success: false,
+          message:
+              "Sorry, you can not cancel within 48 hours.",
+          });
+
+      } else {
+        return res.json({
+          success: false,
+          message:
+              "Only the guest of this reservation or web admin can delete this reservation.",
+          });
+      }
+
   };
 });
 

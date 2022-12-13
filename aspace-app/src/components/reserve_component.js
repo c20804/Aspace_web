@@ -71,16 +71,18 @@ return (
         {currentUser && currentUser.user.role === "guest" && reservationData &&(
                     <div>
                         <h2>Here's your reservations.</h2>
+                        <br/>
                         {reservationData.map((reservation) => (
                             // console.log(reservation.date)
                             <div> 
-                                <img src="..." class="card-img-top" alt="..." />
                                 <div class="card-body">
                                     <h5 class="card-title">PropertyId: {reservation.propertyId}</h5>
                                     <p class="card-text">Reservation date: {reservation.date.split("T")[0]}</p>
-                                    <button onClick={handleDelete} id={reservation._id} class="btn btn-primary">Cancellation</button>
+                                    <button onClick={handleDelete} id={reservation._id} class="btn btn-secondary">Cancellation</button>
                                 </div>
+                                <br />
                             </div>
+
                         ))}
                         {/* {propertyData.map((property) => (
                             <div className="card" style={{ width: "18rem" }}>
