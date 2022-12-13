@@ -59,9 +59,9 @@ const HomeComponent = () => {
     <div>
       <div className="container-fluid fill p1">
         <HomeP1Component />
-        <div className='container'>
+        {/* <div className='container'>
           <ListProperties properties={data} isClick={isClick} setClick={setClick}/>
-        </div>
+        </div> */}
       </div>
       <div className="container-fluid fill p2">
         <HomeP2Component />

@@ -22,7 +22,7 @@ function App() {
     <div className="App">
       <HeaderComponent search={search} setSearch={setSearch} currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       <Routes>
-        <Route path="/" element={<ListComponent/>} />
+        <Route path="/" element={<HomeComponent/>} />
         <Route path="/listing" element={<ListComponent search={search} setSearch={setSearch} currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
         <Route path="/register" element={<SignupComponent/>} />
         <Route path="/login" element={<LoginComponent currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
