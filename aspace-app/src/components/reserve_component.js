@@ -41,11 +41,24 @@ const ReserveComponent = (props) => {
 
       }, []);
 
+    //delete
+    const handleDelete = (e) => {
+        PropertyService.deleteReservation(e.target.id, currentUser.user._id)
+        .then(() => {
+          window.alert("Delete Reservation!");
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      };
+
+
 return (
     <div style={{ padding: "3rem" }}>
         {!currentUser && (
                 <div>
-                <p>You must login before seeing your properties.</p>
+                <p>You must login before seeing your reservations.</p>
                 <button
                     onClick={handleTakeToLogin}
                     className="btn btn-primary btn-lg"
@@ -57,13 +70,16 @@ return (
 
         {currentUser && currentUser.user.role === "guest" && reservationData &&(
                     <div>
-                        <p>Here's your reservations.</p>
+                        <h2>Here's your reservations.</h2>
                         {reservationData.map((reservation) => (
                             // console.log(reservation.date)
                             <div> 
-                                <h4>******</h4>
-                                <h4>propertyId: {reservation.propertyId}</h4>
-                                <h4>reservation date: {reservation.date.split("T")[0]}</h4>
+                                <img src="..." class="card-img-top" alt="..." />
+                                <div class="card-body">
+                                    <h5 class="card-title">PropertyId: {reservation.propertyId}</h5>
+                                    <p class="card-text">Reservation date: {reservation.date.split("T")[0]}</p>
+                                    <button onClick={handleDelete} id={reservation._id} class="btn btn-primary">Cancellation</button>
+                                </div>
                             </div>
                         ))}
                         {/* {propertyData.map((property) => (

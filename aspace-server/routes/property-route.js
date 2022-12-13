@@ -284,4 +284,40 @@ router.delete("/:_id", async (req, res) => {
     };
   });
 
+// delete reservation
+router.delete("/reservation/:_id", async (req, res) => {
+  let { _id } = req.params;
+  let reservation = await Reservation.findOne({ _id });
+  if (!reservation) {
+      res.status(404);
+      return res.json({
+      success: false,
+      message: "Property not found.",
+      });
+  }
+
+  if (reservation.guest.equals(req.user._id) || req.user.isAdmin()) {
+    let curTime = new Date();
+    // if curTime $gt
+    //if reservation.date
+    Reservation.deleteOne({ _id })
+        .then(() => {
+          res.send("Reservation deleted.");
+      })
+      .catch((e) => {
+          res.send({
+          success: false,
+          message: e,
+          });
+      });
+  } else {
+      res.status(403);
+      return res.json({
+      success: false,
+      message:
+          "Only the guest of this reservation or web admin can delete this reservation.",
+      });
+  };
+});
+
 module.exports = router;

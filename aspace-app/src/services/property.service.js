@@ -180,6 +180,21 @@ class PropertyService {
         });
       }
 
+      // delete reservation
+      deleteReservation(_id) {
+        let token;
+        if (localStorage.getItem("user")) {
+          token = JSON.parse(localStorage.getItem("user")).token;
+        } else {
+          token = "";
+        }
+        return axios.delete(API_URL + "/reservation/" + _id, {
+          headers: {
+            Authorization: token,
+          },
+        });
+      }
+
       // get property
       getProperty(_id) {
         let token;
