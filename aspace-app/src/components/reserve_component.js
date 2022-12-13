@@ -15,7 +15,7 @@ const ReserveComponent = (props) => {
         // await axios.put(`http://localhost:8080/api/properties/${id}`, property, {headers: {
         //     Authorization: currentUser.token,
         //   }});
-        navigate("/property");
+        navigate("/listing");
     };
 
     let [propertyData, setPropertyData] = useState(null);
