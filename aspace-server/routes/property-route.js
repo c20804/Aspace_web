@@ -295,7 +295,6 @@ router.delete("/:_id", async (req, res) => {
   });
 
 // delete reservation
-// delete reservation
 router.delete("/reservation/:_id", async (req, res) => {
   let { _id } = req.params;
   let reservation = await Reservation.findOne({ _id });

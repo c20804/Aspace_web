@@ -41,8 +41,16 @@ const PostReservationComponent = (props) => {
       };
 
     return (
+      <div style={{ padding: "3rem" }}>
         <div className="form-group">
+            <label>
+            Select booking date:
+            </label>
             <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+            <p></p>
+            <label>
+            Put guest number here:
+            </label>
             <input
               name="guestNumber"
               type="text"
@@ -50,9 +58,11 @@ const PostReservationComponent = (props) => {
               id="guestNumber"
               onChange={handleChangeGuestNumber}
             />
+            <p></p>
             <button className="btn btn-secondary" onClick={postReservation}>
               Submit
             </button>
+        </div>
         </div>
     );
 }

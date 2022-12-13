@@ -10,6 +10,14 @@ const ReserveComponent = (props) => {
         navigate("/login");
       };
     
+    const onSubmit = async (e) => {
+        // e.preventDefault();
+        // await axios.put(`http://localhost:8080/api/properties/${id}`, property, {headers: {
+        //     Authorization: currentUser.token,
+        //   }});
+        navigate("/property");
+    };
+
     let [propertyData, setPropertyData] = useState(null);
     let [reservationData, setReservationData] = useState(null);
 
@@ -43,12 +51,14 @@ const ReserveComponent = (props) => {
 
     //delete
     const handleDelete = (e) => {
+        
         PropertyService.deleteReservation(e.target.id, currentUser.user._id)
         .then(() => {
           window.alert("Delete Reservation!");
           window.location.reload();
         })
         .catch((err) => {
+        //   window.alert("Delete Fail!");
           console.log(err);
         });
       };
@@ -78,6 +88,28 @@ return (
                                 <div class="card-body">
                                     <h5 class="card-title">PropertyId: {reservation.propertyId}</h5>
                                     <p class="card-text">Reservation date: {reservation.date.split("T")[0]}</p>
+                                    <form onSubmit={(e) => onSubmit(e)}>
+                                    <input
+                                        name="comment"
+                                        type="text"
+                                        className="form-control"
+                                        id="typeOfPost"
+                                        value="put your comment here..."
+                                    />
+                                    <p></p>
+                                    <input
+                                        name="rate"
+                                        type="text"
+                                        className="form-control"
+                                        id="typeOfPost"
+                                        value="rate here..."
+                                    />
+                                    <p></p>
+                                    <button type="submit" className="btn btn-outline-primary">
+                                    Submit comment and rating
+                                    </button>
+                                    <p></p>
+                                    </form>
                                     <button onClick={handleDelete} id={reservation._id} class="btn btn-secondary">Cancellation</button>
                                 </div>
                                 <br />
