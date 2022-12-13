@@ -195,6 +195,21 @@ class PropertyService {
         });
       }
 
+      // delete property
+      deleteProperty(_id) {
+        let token;
+        if (localStorage.getItem("user")) {
+          token = JSON.parse(localStorage.getItem("user")).token;
+        } else {
+          token = "";
+        }
+        return axios.delete(API_URL + "/" + _id, {
+          headers: {
+            Authorization: token,
+          },
+        });
+      }
+
 
 
 

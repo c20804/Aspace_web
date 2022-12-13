@@ -54,6 +54,19 @@ const PropertyComponent = (props) => {
           console.log(err);
         });
     };
+
+    //delete
+    const handleDelete = (e) => {
+      PropertyService.deleteProperty(e.target.id, currentUser.user._id)
+      .then(() => {
+        window.alert("Delete property!");
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    };
+
     // edit
     const handleEdit = (e) => {
       PropertyService.editProperty(e.target.id, currentUser.user._id)
@@ -101,6 +114,7 @@ const PropertyComponent = (props) => {
                                 <p className="card-text">{property.description}</p>
                                 <p className="card-text">$ {property.price} per day</p>
                                 <Link to={`/editproperty/${property._id}`} className="btn btn-secondary">Edit</Link>
+                                <button onClick={handleDelete} className="btn btn-primary" id={property._id}>Delete</button>
                                 <br />
                             </div>
                         </div>
