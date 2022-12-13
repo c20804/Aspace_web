@@ -35,6 +35,16 @@ router.get("/host/:_host_id", (req, res) => {
     });
 });
 
+//UPDATE
+router.put("/:id", async(req, res, next)=>{
+  try{
+      const updatedProperty = await Property.findByIdAndUpdate(req.params.id, { $set: req.body}, {new:true});
+      res.status(200).json(updatedProperty);
+  }catch(err){
+      next(err);
+      // res.status(500).json(err);
+  }
+});
 
 // try to get guests favorites
 router.get("/guest/:_guest_id", (req, res) => {

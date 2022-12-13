@@ -63,7 +63,7 @@ class PropertyService {
         } else {
           token = "";
         }
-        return axios.get(API_URL + "/editproperty/" + id, {
+        return axios.get(API_URL + "/" + id, {
           headers: {
             Authorization: token,
           },

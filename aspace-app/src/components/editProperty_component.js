@@ -38,13 +38,15 @@ const EditPropertyComponent = (props) => {
     };
 
     useEffect(() => {
-        loadProperty();
+        loadProperty(id);
     }, []);
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios.put(`http://localhost:8080/api/properties/${id}`, property);
-        navigate("/");
+        await axios.put(`http://localhost:8080/api/properties/${id}`, property, {headers: {
+            Authorization: currentUser.token,
+          }});
+        navigate("/property");
     };
 
     const loadProperty = async (id) => {
