@@ -1,9 +1,16 @@
 # Aspace_web
 
-It is an online property management web app which allows property owners to rent out any space in their personal home, such as kitchen, game room, garage, etc..
+Welcome to Aspace_web, an innovative online property management web app that empowers property owners to rent out various spaces within their personal homes, ranging from kitchens to game rooms and garages.
+
+# Demo
+[<img src="https://img.youtube.com/vi/AEZ0gQPDnG8/hqdefault.jpg" height="300"
+/>](https://www.youtube.com/embed/AEZ0gQPDnG8)
 
 # How to run:
-# client:
-  Go to aspace-app folder, turn on terminal and run -> npm start
-# server:
-  Go to aspace-server folder, turn on terminal and run -> nodemon index.js
+## client:
+  - Navigate to the **aspace-app** folder.
+  - Open the terminal and run the following command: npm start
+
+## server:
+  - Navigate to the **aspace-server** folder.
+  - Open the terminal and run the following command: nodemon index.js
